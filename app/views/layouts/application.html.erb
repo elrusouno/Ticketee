@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
     	<%if content_for?(:title)%>
     		<%= yield(:title)%>
     	<%else%>
@@ -15,9 +16,40 @@
   </head>
 
   <body>
-  	<%flash.each do |key, message| %>
-  		<div><%=message %></div>
-  	<%end%>
-    <%= yield %>
+    <nav class="navbar navbar-default navbar-fixed-top" rolle="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link_to "Ticketee", root_path, class: "navbar-brand" %>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse">
+            <span class="sr-only">
+              Toggle navigation
+            </span>
+            <span class="icon-bar">
+
+            </span>
+            <span class="icon-bar">
+
+            </span>
+            <span class="icon-bar">
+
+            </span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="collapse">
+        <ul class="nav navbar-nav">
+          <li class="<%= "active" if current_page? ("/") %>">
+          <%= link_to "Home", root_path %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">	
+      <%flash.each do |key, message| %>
+  		  <div class="alert alert-<%= key %>">
+          <%=message %>     
+        </div>
+      <%end%>
+      <%= yield %>
+    </div>
   </body>
 </html>
